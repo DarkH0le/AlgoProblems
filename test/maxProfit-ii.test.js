@@ -1,4 +1,4 @@
-const maxProfit = require('../src/maxProfit');
+const maxProfit = require('../src/maxProfit-ii');
 
 test('MaxProfit of nothing is 0', () => {
     expect(maxProfit([])).toBe(0);
