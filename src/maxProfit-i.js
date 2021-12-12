@@ -3,21 +3,20 @@
  * @return {number}
  */
 var maxProfit = function (prices) {
-    let profit = 0;
+    let minprice = prices[0];
+    let maxProfit = 0;
 
-    function findProfitByDay(sellDay, buyDay) {
-        return prices[sellDay] - prices[buyDay];
+    function getProfit(i) {
+        return prices[i] - minprice;
     }
 
-    for (let buyDay = 0; buyDay < prices.length; buyDay++) {
-        for (let sellDay = buyDay; sellDay < prices.length; sellDay++) {
-            const dayProfit = findProfitByDay(sellDay, buyDay);
-            if ( dayProfit> profit) {
-                profit = dayProfit
-            }
-        }
+    for (let i = 0; i < prices.length; i++) {
+        if (prices[i] < minprice)
+            minprice = prices[i];
+        else if (getProfit(i) > maxProfit)
+            maxProfit = getProfit(i);
     }
-    return profit;
-}
+    return maxProfit;
+};
 
 module.exports = maxProfit;
