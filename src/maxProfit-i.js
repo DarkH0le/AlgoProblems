@@ -3,29 +3,21 @@
  * @return {number}
  */
 var maxProfit = function (prices) {
+    let profit = 0;
 
-    let day = 0;
+    function findProfitByDay(sellDay, buyDay) {
+        return prices[sellDay] - prices[buyDay];
+    }
 
-    
-    if (prices[day] < prices[day + 1]) {
-        if (prices.length > 1) {
-            if (prices[day] < prices[day + 2]) {
-                let profit1 = prices[day + 1] - prices[day];
-                let profit2 = prices[day + 2] - prices[day];
-                return profit2 > profit1 ? profit2 : profit1;
-            }
-
-        }
-        return prices[day + 1] - prices[day];
-    } else {
-        if (prices.length > 1) {
-            if (prices[day + 1] < prices[day + 2]) {
-                return prices[day + 2] - prices[day + 1];
+    for (let buyDay = 0; buyDay < prices.length; buyDay++) {
+        for (let sellDay = buyDay; sellDay < prices.length; sellDay++) {
+            const dayProfit = findProfitByDay(sellDay, buyDay);
+            if ( dayProfit> profit) {
+                profit = dayProfit
             }
         }
     }
-
-    return 0;
-};
+    return profit;
+}
 
 module.exports = maxProfit;
